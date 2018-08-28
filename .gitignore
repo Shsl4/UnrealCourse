@@ -1,0 +1,14 @@
+#Unreal Generated Files#
+Section_03/BuildingEscape/Intermediate/
+Section_03/BuildingEscape/Binaries/
+Section_03/BuildingEscape/Build/
+Section_03/BuildingEscape/DerivedDataCache/
+Section_03/BuildingEscape/Saved
+
+#Visual Studio Generated Files#
+*.db
+
+#Useless Project#
+Section_01/
+Section_03/BuildingEscape/Content/StarterContent/
+1.bat
