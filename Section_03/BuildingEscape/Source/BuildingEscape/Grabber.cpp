@@ -1,48 +1,94 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "Grabber.h"
-#include "GameFramework/Actor.h"
-#include "Math/Vector.h"
-#include "Engine/World.h"
 
 #define OUT
 
-// Sets default values for this component's properties
 UGrabber::UGrabber()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	GetWorld();
-
-	// ...
 }
 
-
-// Called when the game starts
 void UGrabber::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Warning, TEXT("Grabber Reporting for duty!"));
+	PhysicsHandleChecker();
 
-	// ...
+	InputComponentChecker();
 	
 }
 
+void UGrabber::InputComponentChecker()
+{
+	//Check for the InputComponent presence
+
+	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
+
+	if (InputComponent) {
+
+		//Handle is found
+
+		UE_LOG(LogTemp, Warning, TEXT("InputComponent from %s found!"), *(GetOwner()->GetName()));
+
+		InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+		InputComponent->BindAction("Grab", IE_Released, this, &UGrabber::Release);
+
+	}
+	else {
+
+		UE_LOG(LogTemp, Error, TEXT("INPUTCOMPONENT FROM %s NOT FOUND!"), *(GetOwner()->GetName()));
+
+	}
+}
+
+void UGrabber::PhysicsHandleChecker()
+{
+	//Check for the PhysicsHandle presence
+
+	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
+
+	if (PhysicsHandle) {
+
+		//Handle is found
+
+		UE_LOG(LogTemp, Warning, TEXT("PhysicsHandle from %s found!"), *(GetOwner()->GetName()));
+
+	}
+	else {
+
+		UE_LOG(LogTemp, Error, TEXT("PHYSICSHANDLE FROM %s NOT FOUND!"), *(GetOwner()->GetName()));
+
+	}
+}
+
+void UGrabber::Grab() 
+{
+
+	UE_LOG(LogTemp, Warning, TEXT("Grab Key Pressed!"));
+	GetFirstPhysicsBodyInReach();
+
+}
+
+void UGrabber::Release() 
+{
+	UE_LOG(LogTemp, Warning, TEXT("Grab Key Released!"));
+}
 
 // Called every frame
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+}
+
+const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
+{
 	FVector PlayerViewPointLocation;
 	FRotator PlayerViewPointRotation;
 
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
-	OUT PlayerViewPointLocation,
-	OUT PlayerViewPointRotation
+		OUT PlayerViewPointLocation,
+		OUT PlayerViewPointRotation
 	);
 
 	//UE_LOG(LogTemp, Warning, TEXT("Location : %s, Position : %s"), *PlayerViewPointLocation.ToString(), *PlayerViewPointRotation.ToString());
@@ -76,6 +122,6 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 		UE_LOG(LogTemp, Warning, TEXT("Line trace hit: %s"), *(ActorHit->GetName()));
 	}
 
+	return FHitResult();
 
 }
-

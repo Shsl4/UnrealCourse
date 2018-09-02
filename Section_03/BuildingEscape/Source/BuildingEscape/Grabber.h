@@ -5,6 +5,11 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "DrawDebugHelpers.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "Engine/World.h"
+#include "GameFramework/Actor.h"
+#include "Math/Vector.h"
+#include "Engine.h"
 #include "Grabber.generated.h"
 
 
@@ -22,11 +27,24 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	void InputComponentChecker();
+
+	void PhysicsHandleChecker();
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
+
 	float Reach = 200.0f;
+
+	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+
+	UInputComponent* InputComponent = nullptr;
+
+	void Grab();
+	void Release();
 	
+	const FHitResult GetFirstPhysicsBodyInReach();
 };
