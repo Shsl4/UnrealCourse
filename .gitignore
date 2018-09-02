@@ -5,11 +5,17 @@ Section_03/BuildingEscape/Build/
 Section_03/BuildingEscape/DerivedDataCache/
 Section_03/BuildingEscape/Saved/
 Section_03/BuildingEscape/.vs/
+Section_03/BuildingEscape/Content/StarterContent/HDRI/
+Section_03/BuildingEscape/Content/StarterContent/Particles/
+Section_03/BuildingEscape/Content/StarterContent/Maps/
+Section_03/BuildingEscape/Content/StarterContent/Shapes/
+Section_03/BuildingEscape/Content/StarterContent/Audio/
+Section_03/BuildingEscape/Content/StarterContent/Textures/
+Section_03/BuildingEscape/Content/StarterContent/Materials/
 
 #Visual Studio Generated Files#
 *.db
 
 #Useless Project#
 Section_01/
-Section_03/BuildingEscape/Content/StarterContent/
 1.bat
