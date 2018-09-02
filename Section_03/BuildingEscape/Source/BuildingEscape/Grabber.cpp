@@ -3,7 +3,7 @@
 #include "Grabber.h"
 #include "GameFramework/Actor.h"
 #include "Math/Vector.h"
-#include "Engine/WorldComposition.h"
+#include "Engine/World.h"
 
 #define OUT
 
@@ -45,11 +45,37 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	OUT PlayerViewPointRotation
 	);
 
-	UE_LOG(LogTemp, Warning, TEXT("Location : %s, Position : %s"), *PlayerViewPointLocation.ToString(), *PlayerViewPointRotation.ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("Location : %s, Position : %s"), *PlayerViewPointLocation.ToString(), *PlayerViewPointRotation.ToString());
+
+	//Draw a Line representing range
 
 	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
 
 	DrawDebugLine(GetWorld(), PlayerViewPointLocation, LineTraceEnd, FColor(255, 0, 0), false, 0.0f, 0.0f, 1.0f);
+
+	//Raycast
+
+	FHitResult Hit;
+
+	FCollisionQueryParams TraceParameters = (FName(TEXT("")), false, GetOwner());
+
+	GetWorld()->LineTraceSingleByObjectType(
+		OUT Hit,
+		PlayerViewPointLocation,
+		LineTraceEnd,
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+		TraceParameters
+	);
+
+	//Print What we hit
+
+	AActor* ActorHit = Hit.GetActor();
+
+	if (ActorHit) {
+
+		UE_LOG(LogTemp, Warning, TEXT("Line trace hit: %s"), *(ActorHit->GetName()));
+	}
+
 
 }
 
