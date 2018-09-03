@@ -37,7 +37,7 @@ public:
 
 private:
 
-	float Reach = 200.0f;
+	float Reach = 350.0f;
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 
@@ -47,4 +47,6 @@ private:
 	void Release();
 	
 	const FHitResult GetFirstPhysicsBodyInReach();
+
+	const FTwoVectors GetLineTracePoints();
 };
