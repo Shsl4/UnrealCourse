@@ -5,6 +5,7 @@
 #include "Engine/World.h"
 #include "Math/Vector.h"
 
+#define OUT
 
 // Sets default values for this component's properties
 UOpenDoor::UOpenDoor()
@@ -24,7 +25,6 @@ void UOpenDoor::BeginPlay()
 
 	Owner = GetOwner();
 
-	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 
@@ -33,33 +33,38 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (OpenPressurePlate->IsOverlappingActor(ActorThatOpens)) 
+	if (GetTotalMassOfActorsOnPlate() > TriggerMass) 
 	{ 
 
-		OpenDoor();
+		OnOpenRequest.Broadcast();
 
 	}
-
-	if (ClosePressurePlate->IsOverlappingActor(ActorThatOpens)) 
+	else
 	{
 
-		CloseDoor();
+		OnCloseRequest.Broadcast();
 
 	}
 	
 }
 
-void UOpenDoor::OpenDoor()
-{
-	
-	Owner->SetActorRotation(FRotator(0.0f, OpenAngle, 0.0f));
 
-}
+float UOpenDoor::GetTotalMassOfActorsOnPlate() {
 
-void UOpenDoor::CloseDoor()
-{
+	float TotalMass = 0.0f;
 
-	Owner->SetActorRotation(FRotator(0.0f, ClosedAngle, 0.0f));
+	TArray<AActor*> OverlappingActors;
+
+	PressurePlate->GetOverlappingActors(OUT OverlappingActors);
+
+	for (const AActor* Actor : OverlappingActors) {
+
+		TotalMass += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
+		UE_LOG(LogTemp, Warning, TEXT("%s on Pressure plate"), *Actor->GetName())
+
+	}
+
+	return TotalMass;
 
 }
 
