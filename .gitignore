@@ -2,9 +2,9 @@
 Section_03/BuildingEscape/Intermediate/
 Section_03/BuildingEscape/Binaries/
 Section_03/BuildingEscape/Build/
-Section_03/BuildingEscape/DerivedDataCache/
 Section_03/BuildingEscape/Saved/
 Section_03/BuildingEscape/.vs/
+Section_03/BuildingEscape/Content/AutomotiveMaterials/
 Section_03/BuildingEscape/Content/StarterContent/HDRI/
 Section_03/BuildingEscape/Content/StarterContent/Particles/
 Section_03/BuildingEscape/Content/StarterContent/Maps/
@@ -12,6 +12,11 @@ Section_03/BuildingEscape/Content/StarterContent/Shapes/
 Section_03/BuildingEscape/Content/StarterContent/Audio/
 Section_03/BuildingEscape/Content/StarterContent/Textures/
 Section_03/BuildingEscape/Content/StarterContent/Materials/
+Section_04/BattleTank/Intermediate/
+Section_04/BattleTank/Binaries/
+Section_04/BattleTank/Build/
+Section_04/BattleTank/Saved/
+Section_04/BattleTank/.vs/
 
 #Visual Studio Generated Files#
 *.db
@@ -19,4 +24,4 @@ Section_03/BuildingEscape/Content/StarterContent/Materials/
 #Useless Project#
 Section_01/
 1.bat
-Section_03/BuildingEscape/Content/AutomotiveMaterials/
+
