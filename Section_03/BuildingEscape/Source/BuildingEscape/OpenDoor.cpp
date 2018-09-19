@@ -23,8 +23,6 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Owner = GetOwner();
-
 }
 
 
@@ -32,22 +30,14 @@ void UOpenDoor::BeginPlay()
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	if (GetTotalMassOfActorsOnPlate() > TriggerMass) 
-	{ 
-
-		OnOpenRequest.Broadcast();
-
-	}
-	else
+	
+	if (GetTotalMassOfActorsOnPlate() > TriggerMass)
 	{
 
 		OnCloseRequest.Broadcast();
 
 	}
-	
 }
-
 
 float UOpenDoor::GetTotalMassOfActorsOnPlate() {
 

@@ -20,8 +20,6 @@ void UPurpleChairControl::BeginPlay()
 	Super::BeginPlay();
 
 	Owner = GetOwner();
-	
-	isInPlace = false;
 
 }
 
@@ -34,13 +32,6 @@ void UPurpleChairControl::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	if (PurplePlate->IsOverlappingActor(Owner)) {
 
 		PurpleReceiver.Broadcast();
-
-		isInPlace = true;
-	}
-
-	if (isInPlace = true) {
-
-		UE_LOG(LogTemp, Warning, TEXT("Purple in place!"));
 
 	}
 }

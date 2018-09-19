@@ -32,6 +32,8 @@ void UGrabber::InputComponentChecker()
 
 		InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
 		InputComponent->BindAction("Release", IE_Pressed, this, &UGrabber::Release);
+		InputComponent->BindAction("Increase", IE_Pressed, this, &UGrabber::ReachIncrease);
+		InputComponent->BindAction("Decrease", IE_Pressed, this, &UGrabber::ReachDecrease);
 
 	}
 	else {
@@ -96,6 +98,26 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 	}
 
+}
+
+void UGrabber::ReachIncrease()
+{
+
+	if (Reach <= 600.0f) {
+
+		Reach = Reach + 20.0f;
+
+	}
+
+}
+
+void UGrabber::ReachDecrease()
+{
+	if (200.f <= Reach) {
+
+		Reach = Reach - 20.0f;
+
+	}
 }
 
 const FHitResult UGrabber::GetFirstPhysicsBodyInReach()

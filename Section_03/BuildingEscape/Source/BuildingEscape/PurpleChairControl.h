@@ -39,8 +39,5 @@ private:
 	AActor* Owner;
 
 	AActor* SpawnOwner;
-
-	bool isInPlace;
-		
 	
 };

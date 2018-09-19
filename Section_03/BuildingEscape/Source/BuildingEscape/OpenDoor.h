@@ -5,9 +5,9 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Engine/TriggerVolume.h"
+#include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
 #include "OpenDoor.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCloseRequest);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -32,17 +32,12 @@ private:
 	UPROPERTY(EditAnywhere)
 		ATriggerVolume* PressurePlate = nullptr;
 
-	UPROPERTY(EditAnywhere)
-		float TriggerMass;
-
-	UPROPERTY(BlueprintAssignable)
-		FOnOpenRequest OnOpenRequest;
-
 	UPROPERTY(BlueprintAssignable)
 		FOnCloseRequest OnCloseRequest;
 
-	AActor* Owner = nullptr;
+	UPROPERTY(EditAnywhere)
+		float TriggerMass;
 
 	float GetTotalMassOfActorsOnPlate();
-	
+
 };

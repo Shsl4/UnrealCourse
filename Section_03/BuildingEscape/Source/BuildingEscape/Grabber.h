@@ -7,12 +7,11 @@
 #include "DrawDebugHelpers.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Engine/World.h"
+#include "Engine/TriggerVolume.h"
 #include "GameFramework/Actor.h"
 #include "Math/Vector.h"
 #include "Engine.h"
 #include "Grabber.generated.h"
-
-
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDINGESCAPE_API UGrabber : public UActorComponent
@@ -38,6 +37,10 @@ public:
 private:
 
 	float Reach = 350.0f;
+
+	void ReachIncrease();
+
+	void ReachDecrease();
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 
